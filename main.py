@@ -1,12 +1,12 @@
 # pip install beautifulsoup4 requests schedule python-telegram-bot
-import requests, schedule, time
+import requests, schedule, time, os
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
 from telegram import Bot
 
 # == KONFIGURASI TELEGRAM ==
-TELEGRAM_TOKEN = 'YOUR_TELEGRAM_BOT_TOKEN'
-CHAT_ID = 'YOUR_CHAT_ID'
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
+CHAT_ID = os.getenv("CHAT_ID")
 bot = Bot(token=TELEGRAM_TOKEN)
 
 # == KATA KUNCI ==
