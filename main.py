@@ -3,6 +3,8 @@ import requests, schedule, time, os
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
 from telegram import Bot
+from dotenv import load_dotenv
+import pytz
 
 # == KONFIGURASI TELEGRAM ==
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
@@ -60,7 +62,8 @@ def scrape_sites():
 
 # == FUNGSI UTAMA ==
 def run_monitor():
-    now = datetime.now()
+    tz = pytz.timezone("Asia/Jakarta")
+    now = datetime.now(tz)
     start_time = now - timedelta(days=1)
 
     # Format waktu
@@ -89,8 +92,8 @@ def run_monitor():
     bot.send_message(chat_id=CHAT_ID, text=message)
 
 # == JADWAL ==
-schedule.every().day.at("08:00").do(run_monitor)
-schedule.every().day.at("20:00").do(run_monitor)
+schedule.every().day.at("01:00").do(run_monitor)  # 08:00 WIB
+schedule.every().day.at("13:00").do(run_monitor)  # 20:00 WIB
 
 # == JALANKAN LOOP ==
 print("🚀 Monitor berjalan... Menunggu jam 08:00 dan 20:00")
